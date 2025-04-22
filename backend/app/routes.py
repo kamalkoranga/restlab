@@ -92,30 +92,31 @@ def handle_environments():
 def execute_request():
     request_data = request.json
     
-    # Execute the request
-    result = RequestExecutor.execute(request_data)
+    # Get active environment variables (example implementation)
+    active_env_id = request_data.get('environment_id')  # Pass this from frontend
+    environment_vars = {}
+    if active_env_id:
+        env = Environment.query.get(active_env_id)
+        if env:
+            environment_vars = env.variables or {}
+
     
-    if not result['success']:
-        return jsonify({'error': result['error']}), 500
+    # Execute with variable substitution
+    result = RequestExecutor.execute(request_data, environment_vars)
+
+    # Save to history (existing code)
+    if result['success']:
+        history = History(
+            request_data=request_data,
+            response_status=result['status'],
+            response_data=json.dumps(result['data']) if isinstance(result['data'], (dict, list)) else result['data'],
+            response_headers=result['headers'],
+            duration=result['duration']
+        )
+        db.session.add(history)
+        db.session.commit()
     
-    # Save to history
-    history = History(
-        request_data=request_data,
-        response_status=result['status'],
-        response_data=json.dumps(result['data']) if isinstance(result['data'], dict) else result['data'],
-        response_headers=result['headers'],
-        duration=result['duration']
-    )
-    db.session.add(history)
-    db.session.commit()
-    
-    return jsonify({
-        'status': result['status'],
-        'headers': result['headers'],
-        'data': result['data'],
-        'duration': result['duration'],
-        'history_id': history.id
-    })
+    return jsonify(result)
 
 # History Endpoints
 @api_bp.route('/history', methods=['GET'])
