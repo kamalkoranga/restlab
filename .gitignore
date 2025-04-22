@@ -3,3 +3,4 @@ Todo.md
 __pycache__/
 .flaskenv
 instance/
+node_modules/
