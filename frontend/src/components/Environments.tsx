@@ -4,6 +4,7 @@ import { useAppContext } from '../contexts/AppContext';
 import { Environment, EnvironmentVariable } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import './FuturisticStyles.css';
+import './EnvironmentStyles.css';
 
 export const Environments: React.FC = () => {
   const {
@@ -584,6 +585,7 @@ export const Environments: React.FC = () => {
               </div>
 
               <div className="variables-section">
+                <hr />
                 <div className="section-header">
                   <h4>Variables</h4>
                   <div className="section-actions">
@@ -671,17 +673,7 @@ export const Environments: React.FC = () => {
                           placeholder="Variable name (e.g. API_KEY)"
                           className="futuristic-input variable-key-input"
                         />
-                        <select
-                          value={newVariable.category}
-                          onChange={(e) => setNewVariable({ ...newVariable, category: e.target.value })}
-                          className="futuristic-select variable-category-select"
-                        >
-                          {variableCategories.map(category => (
-                            <option key={category} value={category}>{category}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="variable-form-row">
+                        
                         <input
                           type="text"
                           value={newVariable.value}
@@ -694,6 +686,17 @@ export const Environments: React.FC = () => {
                             }
                           }}
                         />
+                      </div>
+                      <div className="variable-form-row">
+                        <select
+                          value={newVariable.category}
+                          onChange={(e) => setNewVariable({ ...newVariable, category: e.target.value })}
+                          className="futuristic-select variable-category-select"
+                        >
+                          {variableCategories.map(category => (
+                            <option key={category} value={category}>{category}</option>
+                          ))}
+                        </select>
                         <button
                           onClick={handleAddVariable}
                           className="futuristic-btn futuristic-btn-primary"
@@ -703,7 +706,7 @@ export const Environments: React.FC = () => {
                         </button>
                       </div>
                     </div>
-
+                    <hr />
                     {filteredVariables.length > 0 ? (
                       <div className="variables-list futuristic-slide-in">
                         {filteredVariables.map((variable, index) => {

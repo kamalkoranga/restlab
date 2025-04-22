@@ -135,7 +135,6 @@
 .section-header,
 .response-header-modern,
 .view-mode-toggle-modern {
-  position: sticky;
   top: 0;
   background: var(--bg-panel);
   z-index: 10;

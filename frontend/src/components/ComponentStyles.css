@@ -278,6 +278,14 @@
   display: flex;
   height: 100%;
   gap: 24px;
+
+  .collections-sidebar {
+    flex: 1 1 30%;
+  }
+
+  .collections-content {
+    flex: 1 1 80%;
+  }
 }
 
 .collections-sidebar {

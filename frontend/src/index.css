@@ -523,6 +523,7 @@ input:focus, select:focus, textarea:focus {
 
 .request-name {
   font-size: 14px;
+  margin-left: 10px;
 }
 
 .delete-request-button {
