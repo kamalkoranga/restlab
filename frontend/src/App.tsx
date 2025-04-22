@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { RequestBuilder } from './components/RequestBuilder';
 import { Collections } from './components/Collections';
@@ -9,9 +9,14 @@ import LandingPage from './components/LandingPage';
 function App() {
   const [activeTab, setActiveTab] = useState('builder');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Changed to true for default dark mode
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // Apply dark mode on initial load
+  useEffect(() => {
+    document.documentElement.classList.add('dark-mode');
+  }, []);
+
   // Toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -181,4 +186,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

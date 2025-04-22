@@ -1,0 +1,222 @@
+/* RequestBuilder.css */
+/* Main styles for the request builder component */
+
+.request-builder-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  color: var(--light-text);
+  padding: 20px;
+  overflow: auto;
+}
+
+.method-selector-container {
+  margin-bottom: 16px;
+}
+
+.method-dropdown {
+  padding: 8px 12px;
+  background-color: var(--bg-card);
+  color: var(--light-text);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  min-width: 120px;
+}
+
+.method-dropdown option {
+  background-color: var(--bg-dark);
+  color: var(--light-text);
+  padding: 8px;
+}
+
+.request-inputs {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* Response section styling */
+.response-section {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.response-section h3 {
+  padding: 12px 16px;
+  margin: 0;
+  background-color: var(--bg-darker);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.response-container, .error-container {
+  padding: 16px;
+  background-color: var(--bg-card);
+}
+
+.response-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.status {
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-2xx {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.status-3xx {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+}
+
+.status-4xx, .status-5xx {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.time, .size {
+  font-size: 13px;
+  color: var(--muted-text);
+}
+
+.response-body {
+  margin-bottom: 20px;
+}
+
+.json-response {
+  padding: 16px;
+  background-color: var(--bg-darker);
+  border-radius: 4px;
+  overflow: auto;
+  max-height: 400px;
+  font-family: 'Roboto Mono', monospace;
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.response-headers h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: var(--light-text);
+}
+
+.response-headers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 8px;
+}
+
+.response-headers li {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: var(--bg-darker);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error-message {
+  padding: 16px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid #ef4444;
+  color: #ef4444;
+  border-radius: 4px;
+  overflow: auto;
+  max-height: 300px;
+  font-family: 'Roboto Mono', monospace;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+
+/* Request methods color coding */
+.method-dropdown option[value="GET"] {
+  color: #2563eb; /* Blue */
+}
+
+.method-dropdown option[value="POST"] {
+  color: #10b981; /* Green */
+}
+
+.method-dropdown option[value="PUT"] {
+  color: #ff9800; /* Orange */
+}
+
+.method-dropdown option[value="DELETE"] {
+  color: #ef4444; /* Red */
+}
+
+.method-dropdown option[value="PATCH"] {
+  color: #8b5cf6; /* Purple */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .request-builder-container {
+    padding: 12px;
+  }
+  
+  .response-headers ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.response-container, .error-container {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Syntax highlighting for JSON */
+.json-key {
+  color: #f59e0b;
+}
+
+.json-value-string {
+  color: #10b981;
+}
+
+.json-value-number {
+  color: #3b82f6;
+}
+
+.json-value-boolean {
+  color: #8b5cf6;
+}
+
+.json-value-null {
+  color: #6b7280;
+}
