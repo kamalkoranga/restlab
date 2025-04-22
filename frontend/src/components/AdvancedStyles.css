@@ -1,0 +1,822 @@
+
+/* Advanced Styles for Modern UI Elements */
+
+/* Method Dropdown override for integration */
+.method-dropdown-modern {
+  z-index: 1000;
+}
+
+/* URL container adjustments */
+.url-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 8px 12px;
+  background: var(--bg-content, #fff);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* URL input styling */
+.url-input-modern {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
+
+.url-input-modern:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+.dark-theme .url-input-modern {
+  background: rgba(30, 30, 40, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #eee;
+}
+
+/* Glass effect panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  position: relative;
+}
+
+/* Component container */
+.component-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Component header */
+.component-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #4a6cf7, #6a3ef7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Environment pill */
+.environment-pill {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.active-env {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.env-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4caf50;
+}
+
+.no-env {
+  color: #999;
+}
+
+/* Fix scrolling issues in RequestBuilder component */
+.component-container.request-builder-modern {
+  height: auto;
+  min-height: 100%;
+  overflow-y: visible;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+/* Ensure scrollable regions have proper overflow handling */
+.tab-content, 
+.response-panel-modern, 
+.response-body-container-modern,
+.response-headers-container-modern {
+  overflow: auto;
+  max-height: 500px; /* Adjust as needed */
+  position: relative;
+}
+
+/* Fix response content scrolling */
+.response-body {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Fix sticky headers */
+.section-header,
+.response-header-modern,
+.view-mode-toggle-modern {
+  position: sticky;
+  top: 0;
+  background: var(--bg-panel);
+  z-index: 10;
+}
+
+/* Ensure the component container has proper spacing */
+body {
+  overflow-y: auto;
+}
+
+/* Fix for long URLs */
+.url-input-modern {
+  text-overflow: ellipsis;
+}
+
+/* Make sure form sections don't overflow */
+.body-editor-modern,
+.save-request-modern {
+  overflow: visible;
+  position: relative;
+}
+
+/* Increased space at the bottom to prevent content getting cut off */
+.request-builder-modern {
+  margin-bottom: 50px;
+}
+
+/* Fix for response panel to ensure it's fully visible */
+.response-panel-modern {
+  position: relative;
+  z-index: 5;
+}
+
+/* Table width fix for headers view */
+.modern-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.modern-table td {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Modern tabs styling */
+.tabs-container {
+  margin-bottom: 16px;
+}
+
+.tabs-list-modern {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 -1px 0;
+  position: relative;
+  z-index: 5;
+}
+
+.tab-item-modern {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tab-item-modern svg {
+  opacity: 0.7;
+}
+
+.tab-item-modern:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.tab-item-modern.active {
+  background: var(--bg-content, #fff);
+  border-color: rgba(0, 0, 0, 0.1);
+  border-bottom-color: transparent;
+  color: #4a6cf7;
+}
+
+.tab-item-modern.active svg {
+  opacity: 1;
+  color: #4a6cf7;
+}
+
+.dark-theme .tab-item-modern.active {
+  background: var(--bg-content, #1e1e28);
+  border-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: transparent;
+}
+
+.tab-content {
+  background: var(--bg-content, #fff);
+  border-radius: 0 8px 8px 8px;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+}
+
+.dark-theme .tab-content {
+  background: var(--bg-content, #1e1e28);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Body editor modern */
+.body-editor-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.body-type-select-modern {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.body-type-button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.body-type-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.body-type-button.active {
+  background: rgba(74, 108, 247, 0.1);
+  color: #4a6cf7;
+  border-color: rgba(74, 108, 247, 0.3);
+}
+
+.dark-theme .body-type-button {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .body-type-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .body-type-button.active {
+  background: rgba(74, 108, 247, 0.2);
+}
+
+/* Raw body container */
+.raw-body-container-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.raw-body-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body-type-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #666;
+}
+
+.format-button-modern {
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.format-button-modern:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.format-button-modern svg {
+  width: 14px;
+  height: 14px;
+}
+
+.raw-body-input-modern {
+  width: 100%;
+  min-height: 200px;
+  padding: 12px;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  resize: vertical;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.raw-body-input-modern:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+.raw-body-input-modern.has-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.json-error-modern {
+  padding: 8px 12px;
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border-radius: 4px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Save request section */
+.save-request-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.section-header svg {
+  opacity: 0.7;
+}
+
+.section-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.save-request-inputs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.modern-input,
+.modern-select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.modern-input:focus,
+.modern-select:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* Override for the save button to match our design */
+.save-button-override {
+  width: auto;
+  margin-top: 10px;
+  max-width: 200px;
+  align-self: flex-start;
+}
+
+.error-message-modern {
+  padding: 8px 12px;
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Response panel styling */
+.response-panel-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.response-header-modern {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.response-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.response-title svg {
+  opacity: 0.7;
+}
+
+.response-title h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.response-status-container {
+  display: flex;
+  align-items: center;
+}
+
+.status-badge-modern {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.status-2xx {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.status-3xx {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}
+
+.status-4xx {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.status-5xx {
+  background-color: rgba(155, 89, 182, 0.1);
+  color: #9b59b6;
+}
+
+.status-0xx {
+  background-color: rgba(127, 140, 141, 0.1);
+  color: #7f8c8d;
+}
+
+.status-code {
+  font-weight: 700;
+}
+
+.response-meta {
+  display: flex;
+  gap: 16px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.meta-item svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+/* View mode toggle */
+.view-mode-toggle-modern {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.view-mode-button-modern {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-mode-button-modern.active {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .view-mode-toggle-modern {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .view-mode-button-modern.active {
+  background: rgba(30, 30, 40, 0.95);
+}
+
+/* Response body styling */
+.response-body-container-modern {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+  overflow: auto;
+}
+
+.response-body {
+  padding: 16px;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.response-body.json {
+  color: #333;
+}
+
+/* Response tab content */
+.response-tab-content {
+  padding: 16px;
+  background: var(--bg-content, #fff);
+  border-radius: 0 8px 8px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling for headers */
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th,
+.modern-table td {
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modern-table th {
+  font-weight: 600;
+  color: #666;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark-theme .modern-table th {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modern-table tr:hover td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark-theme .modern-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Empty state styling */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: #999;
+  text-align: center;
+  gap: 16px;
+}
+
+/* Response actions styling */
+.response-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Specific styling for the retry button */
+.retry-request-button {
+  min-width: 100px;
+}
+
+/* Copy response button styling */
+.copy-response-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-response-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.copy-response-button svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+/* Override for the url-send-button to match the design */
+.url-send-button {
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark theme adjustments */
+.dark-theme .glass-panel {
+  background: rgba(30, 30, 40, 0.3);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .modern-input,
+.dark-theme .modern-select,
+.dark-theme .raw-body-input-modern {
+  background: rgba(30, 30, 40, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #eee;
+}
+
+.dark-theme .body-type-label,
+.dark-theme .input-group label,
+.dark-theme .meta-item {
+  color: #aaa;
+}
+
+.dark-theme .format-button-modern,
+.dark-theme .copy-response-button {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .format-button-modern:hover,
+.dark-theme .copy-response-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dark-theme .response-body.json {
+  color: #eee;
+}
+
+.dark-theme .response-body-container-modern {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .save-request-inputs {
+    flex-direction: column;
+  }
+  
+  .url-container {
+    flex-wrap: wrap;
+  }
+  
+  .method-dropdown-modern {
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  .url-input-modern {
+    width: calc(100% - 120px);
+  }
+  
+  .response-header-modern {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .response-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .tab-item-modern {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .section-header h3 {
+    font-size: 16px;
+  }
+}
+
+/* Fix any potential z-index issues with the method dropdown */
+.method-dropdown-modern {
+  position: relative;
+  z-index: 1001;
+}
+
+/* Ensure the dropdown opens above other elements */
+.method-dropdown-modern .method-options {
+  z-index: 1002;
+}
+
+/* Animation for response panel appearance */
+.response-panel-modern {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Additional styling for the SendButton integration */
+.url-send-button.method-get {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+.url-send-button.method-post {
+  background: linear-gradient(135deg, #ff9800, #e65100);
+}
+
+.url-send-button.method-put {
+  background: linear-gradient(135deg, #2196f3, #0d47a1);
+}
+
+.url-send-button.method-delete {
+  background: linear-gradient(135deg, #f44336, #b71c1c);
+}
+
+.url-send-button.method-patch {
+  background: linear-gradient(135deg, #9c27b0, #4a148c);
+}
+
+.url-send-button.method-options,
+.url-send-button.method-head {
+  background: linear-gradient(135deg, #607d8b, #263238);
+}

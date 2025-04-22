@@ -1,0 +1,187 @@
+/* Method Dropdown Styles */
+.method-dropdown-container {
+  position: relative;
+  min-width: 110px;
+  z-index: 100;
+}
+
+/* Method selector button */
+.method-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: rgba(97, 175, 254, 0.2);
+  color: #2186E4;
+}
+
+/* Method-specific colors */
+.method-selector.get {
+  background-color: rgba(97, 175, 254, 0.2);
+  color: #2186E4;
+}
+
+.method-selector.post {
+  background-color: rgba(73, 204, 144, 0.2);
+  color: #27AE60;
+}
+
+.method-selector.put {
+  background-color: rgba(252, 161, 48, 0.2);
+  color: #F39C12;
+}
+
+.method-selector.delete {
+  background-color: rgba(249, 62, 62, 0.2);
+  color: #E74C3C;
+}
+
+.method-selector.patch {
+  background-color: rgba(186, 85, 211, 0.2);
+  color: #9B59B6;
+}
+
+.method-selector.options,
+.method-selector.head {
+  background-color: rgba(150, 150, 150, 0.2);
+  color: #555;
+}
+
+/* Dropdown arrow icon */
+.dropdown-arrow {
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  margin-left: 5px;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.method-selector.active .dropdown-arrow {
+  transform: rotate(225deg);
+}
+
+/* Method options dropdown */
+.method-options {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 101;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Option buttons */
+.method-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.method-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.method-option.selected {
+  font-weight: 600;
+}
+
+/* Method-specific option colors */
+.method-option.get {
+  color: #2186E4;
+}
+
+.method-option.post {
+  color: #27AE60;
+}
+
+.method-option.put {
+  color: #F39C12;
+}
+
+.method-option.delete {
+  color: #E74C3C;
+}
+
+.method-option.patch {
+  color: #9B59B6;
+}
+
+.method-option.options,
+.method-option.head {
+  color: #555;
+}
+
+/* Added background-color for selected method */
+.method-option.get.selected {
+  background-color: rgba(97, 175, 254, 0.1);
+}
+
+.method-option.post.selected {
+  background-color: rgba(73, 204, 144, 0.1);
+}
+
+.method-option.put.selected {
+  background-color: rgba(252, 161, 48, 0.1);
+}
+
+.method-option.delete.selected {
+  background-color: rgba(249, 62, 62, 0.1);
+}
+
+.method-option.patch.selected {
+  background-color: rgba(186, 85, 211, 0.1);
+}
+
+.method-option.options.selected,
+.method-option.head.selected {
+  background-color: rgba(150, 150, 150, 0.1);
+}
+
+/* Dark theme adjustments */
+.dark-theme .method-options {
+  background: #2d2d3a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .method-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .method-selector {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
