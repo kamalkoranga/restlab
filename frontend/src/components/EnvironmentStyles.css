@@ -1,0 +1,351 @@
+/* Additional styles for the enhanced Environments component */
+
+.environment-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.environment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.environment-card.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--success), var(--primary));
+}
+
+.environment-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.environment-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  max-height: 60px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.environment-description:hover {
+  color: var(--text-primary);
+}
+
+.environment-description::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to top, var(--card-bg), transparent);
+}
+
+.environment-content {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.variable-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.count-number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.count-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.variable-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.category-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.environment-name-edit {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.environment-description-edit {
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.edit-icon {
+  margin-left: 0.5rem;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  opacity: 1;
+}
+
+.bulk-instructions {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(3, 169, 244, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary);
+}
+
+.bulk-textarea {
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.bulk-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.variable-form-row {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 120px auto;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-select {
+  text-transform: capitalize;
+}
+
+.variables-table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.transparent-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  padding: 0.5rem 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.transparent-input:focus {
+  background-color: rgba(3, 169, 244, 0.1);
+  border-bottom: 1px solid var(--primary);
+}
+
+.value-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-visibility-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.toggle-visibility-btn:hover {
+  opacity: 1;
+}
+
+.disabled-row {
+  opacity: 0.6;
+}
+
+.info-panel {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.info-icon {
+  color: var(--primary);
+}
+
+.variable-syntax {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--primary);
+}
+
+.environment-visualization {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.visualization-example {
+  margin-top: 0.5rem;
+}
+
+.example-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.example-method {
+  background-color: rgba(0, 200, 83, 0.2);
+  color: var(--method-get);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.example-url {
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.url-prefix, .url-path {
+  color: var(--text-secondary);
+}
+
+.url-var {
+  color: var(--primary);
+}
+
+.example-preview {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.example-result {
+  margin-left: 0.5rem;
+  font-family: monospace;
+}
+
+.resolved-value {
+  background-color: rgba(0, 200, 83, 0.15);
+  color: var(--success);
+  padding: 0 0.25rem;
+  border-radius: 2px;
+}
+
+.unresolved-value {
+  background-color: rgba(255, 61, 0, 0.15);
+  color: var(--error);
+  padding: 0 0.25rem;
+  border-radius: 2px;
+}
+
+/* Futuristic checkbox styling */
+.futuristic-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.futuristic-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.futuristic-checkbox:hover input ~ .checkmark {
+  background-color: rgba(3, 169, 244, 0.1);
+}
+
+.futuristic-checkbox input:checked ~ .checkmark {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.futuristic-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.futuristic-checkbox .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.futuristic-checkbox input:focus ~ .checkmark {
+  box-shadow: 0 0 0 2px rgba(3, 169, 244, 0.3);
+}
