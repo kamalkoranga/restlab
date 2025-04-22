@@ -55,3 +55,19 @@ def handle_request(id):
         db.session.commit()
         return jsonify({'success': True})
 
+# Collections Endpoints (similar structure)
+@api_bp.route('/collections', methods=['GET', 'POST'])
+def handle_collections():
+    if request.method == 'GET':
+        collections = Collection.query.order_by(Collection.created_at.desc()).all()
+        return jsonify([c.to_dict() for c in collections])
+    else:
+        data = request.json
+        new_collection = Collection(
+            name=data['name'],
+            description=data.get('description')
+        )
+        db.session.add(new_collection)
+        db.session.commit()
+        return jsonify(new_collection.to_dict()), 201
+
