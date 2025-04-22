@@ -1,0 +1,276 @@
+:root {
+  /* Light theme variables */
+  --light-bg: #f8fafc;
+  --light-surface: #ffffff;
+  --light-border: #e2e8f0;
+  --light-text: #0f172a;
+  --light-text-secondary: #64748b;
+  
+  /* Dark theme variables */
+  --dark-bg: #0f172a;
+  --dark-surface: #1e293b;
+  --dark-border: #334155;
+  --dark-text: #f8fafc;
+  --dark-text-secondary: #94a3b8;
+  
+  /* Primary and accent colors */
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #3b82f6;
+  
+  /* Theme-aware variables */
+  --bg-content: var(--light-bg);
+  --bg-secondary: var(--light-surface);
+  --bg-input: #ffffff;
+  --bg-hover: #f1f5f9;
+  --bg-code: #f8fafc;
+  --border-color: var(--light-border);
+  --text-primary: var(--light-text);
+  --text-secondary: var(--light-text-secondary);
+  --text-code: #334155;
+}
+
+.dark-theme {
+  --bg-content: var(--dark-bg);
+  --bg-secondary: var(--dark-surface);
+  --bg-input: #1e293b;
+  --bg-hover: #334155;
+  --bg-code: #1e293b;
+  --border-color: var(--dark-border);
+  --text-primary: var(--dark-text);
+  --text-secondary: var(--dark-text-secondary);
+  --text-code: #e2e8f0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--bg-content);
+  color: var(--text-primary);
+}
+
+.app-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: 240px;
+  height: 100%;
+  background-color: var(--light-surface);
+  border-right: 1px solid var(--light-border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.app-sidebar.collapsed {
+  width: 60px;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--light-border);
+}
+
+.app-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0;
+  border-left: 3px solid transparent;
+  background-color: transparent;
+  color: var(--light-text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: none;
+  margin: 0.25rem 0;
+  justify-content: flex-start;
+}
+
+.nav-item svg {
+  min-width: 20px;
+}
+
+.nav-item:hover {
+  background-color: rgba(241, 245, 249, 0.8);
+  color: var(--light-text);
+  transform: none;
+}
+
+.nav-item.active {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+}
+
+.sidebar-footer {
+  padding: 1rem 0;
+  border-top: 1px solid var(--light-border);
+}
+
+/* Main content */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background-color: var(--light-surface);
+  border-bottom: 1px solid var(--light-border);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--light-text);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--light-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.github-link:hover {
+  color: var(--primary-color);
+}
+
+.app-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow: auto;
+  position: relative;
+}
+
+/* Dark theme */
+.dark-theme {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.dark-theme .app-sidebar,
+.dark-theme .app-header,
+.dark-theme .url-container,
+.dark-theme .tab-content,
+.dark-theme .response-panel {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+
+.dark-theme .app-sidebar {
+  border-right-color: var(--dark-border);
+}
+
+.dark-theme .app-header {
+  border-bottom-color: var(--dark-border);
+}
+
+.dark-theme h1, 
+.dark-theme h3, 
+.dark-theme h4 {
+  color: var(--dark-text);
+}
+
+.dark-theme .nav-item {
+  color: var(--dark-text-secondary);
+}
+
+.dark-theme .nav-item:hover {
+  background-color: rgba(15, 23, 42, 0.6);
+  color: var(--dark-text);
+}
+
+.dark-theme .nav-item.active {
+  background-color: rgba(99, 102, 241, 0.15);
+}
+
+.dark-theme .app-logo {
+  border-color: var(--dark-border);
+}
+
+.dark-theme .sidebar-footer {
+  border-color: var(--dark-border);
+}
+
+.dark-theme button {
+  background-color: var(--dark-surface);
+  color: var(--dark-text);
+}
+
+.dark-theme button:hover {
+  background-color: #1a2234;
+}
+
+.dark-theme input, 
+.dark-theme select, 
+.dark-theme textarea {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+.dark-theme .github-link {
+  color: var(--dark-text-secondary);
+}
+
+.dark-theme .github-link:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .app-sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+} 
