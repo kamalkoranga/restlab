@@ -117,3 +117,19 @@ def execute_request():
         'history_id': history.id
     })
 
+# History Endpoints
+@api_bp.route('/history', methods=['GET'])
+def get_history():
+    history = History.query.order_by(History.created_at.desc()).all()
+    return jsonify([h.to_dict() for h in history])
+
+@api_bp.route('/history/<int:id>', methods=['GET', 'DELETE'])
+def handle_history_item(id):
+    item = History.query.get_or_404(id)
+    
+    if request.method == 'GET':
+        return jsonify(item.to_dict())
+    else:
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify({'success': True})
