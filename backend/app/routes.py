@@ -65,15 +65,14 @@ def handle_collections():
     if request.method == 'GET':
         collections = Collection.query.order_by(Collection.created_at.desc()).all()
         return jsonify([c.to_dict() for c in collections])
-    else:
-        data = request.json
-        new_collection = Collection(
-            name=data['name'],
-            description=data.get('description')
-        )
-        db.session.add(new_collection)
-        db.session.commit()
-        return jsonify(new_collection.to_dict()), 201
+    data = request.json
+    new_collection = Collection(
+        name=data['name'],
+        description=data.get('description')
+    )
+    db.session.add(new_collection)
+    db.session.commit()
+    return jsonify(new_collection.to_dict()), 201
 
 
 # Environments Endpoints
@@ -82,16 +81,34 @@ def handle_environments():
     if request.method == 'GET':
         envs = Environment.query.order_by(Environment.created_at.desc()).all()
         return jsonify([e.to_dict() for e in envs])
-    else:
-        data = request.json
-        new_env = Environment(
-            name=data['name'],
-            variables=data.get('variables', {})
-        )
-        db.session.add(new_env)
-        db.session.commit()
-        return jsonify(new_env.to_dict()), 201
+    data = request.json
+    new_env = Environment(
+        name=data['name'],
+        variables=data.get('variables', {})
+    )
+    db.session.add(new_env)
+    db.session.commit()
+    return jsonify(new_env.to_dict()), 201
 
+
+@api_bp.route('/environments/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def handle_environment(id: int):
+    env = Environment.query.get_or_404(id)
+    
+    if request.method == 'GET':
+        return jsonify(env.to_dict())
+    
+    elif request.method == 'PUT':
+        data = request.json
+        env.name = data.get('name', env.name)
+        env.variables = data.get('variables', env.variables)
+        db.session.commit()
+        return jsonify(env.to_dict())
+    
+    elif request.method == 'DELETE':
+        db.session.delete(env)
+        db.session.commit()
+        return jsonify({'success': True})
 
 # Execution Endpoint
 @api_bp.route('/execute', methods=['POST'])
