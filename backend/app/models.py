@@ -1,13 +1,14 @@
 from app import db
 from datetime import datetime
+from json import loads
 
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     method = db.Column(db.String(10), nullable=False)
     url = db.Column(db.String(500), nullable=False)
-    headers = db.Column(db.JSON)
-    params = db.Column(db.JSON)
+    headers = db.Column(db.Text)
+    params = db.Column(db.Text)
     body = db.Column(db.Text)
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -18,9 +19,9 @@ class Request(db.Model):
             'name': self.name,
             'method': self.method,
             'url': self.url,
-            'headers': self.headers,
-            'params': self.params,
-            'body': self.body,
+            'headers': loads(self.headers) if self.headers else None,
+            'params': loads(self.params) if self.params else None,
+            'body': loads(self.body) if self.body else None,
             'collection_id': self.collection_id,
             'created_at': self.created_at.isoformat()
         }
