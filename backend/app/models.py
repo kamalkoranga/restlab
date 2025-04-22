@@ -2,6 +2,7 @@ from app import db
 from datetime import datetime
 from json import loads
 
+
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -26,6 +27,7 @@ class Request(db.Model):
             'created_at': self.created_at.isoformat()
         }
 
+
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -42,6 +44,7 @@ class Collection(db.Model):
             'created_at': self.created_at.isoformat()
         }
 
+
 class Environment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -55,6 +58,7 @@ class Environment(db.Model):
             'variables': self.variables,
             'created_at': self.created_at.isoformat()
         }
+
 
 class History(db.Model):
     id = db.Column(db.Integer, primary_key=True)

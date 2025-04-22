@@ -1,25 +1,60 @@
 import requests
+import re
 import json
+from urllib.parse import urlparse
 from datetime import datetime
+
+
+def substitute_variables(url, variables):
+    if not variables:
+        return url
+    """Replace {{var}} with values from environment"""
+    for key, value in variables.items():
+        url = url.replace(f'{{{{{key}}}}}', str(value))
+    return url
+
+
+def is_valid_url(url):
+    """Check if the URL is properly formatted"""
+    try:
+        result = urlparse(url)
+        return all([result.scheme in ('http', 'https'), result.netloc])
+    except:
+        return False
+
 
 class RequestExecutor:
     @staticmethod
-    def execute(request_data):
+    def execute(request_data, environment_vars=None):
         try:
-            start_time = datetime.now()
+            url = substitute_variables(request_data['url'], environment_vars or {})
             
-            # Prepare headers
-            headers = request_data.get('headers', {})
-            if 'Content-Type' not in headers and request_data.get('body'):
-                headers['Content-Type'] = 'application/json'
+            if not is_valid_url(url):
+                return {'success': False, 'error': f'Invalid URL: {url}'}
+
+            headers = {
+                substitute_variables(k, environment_vars or {}): substitute_variables(v, environment_vars or {})
+                for k, v in request_data.get('headers', {}).items()
+            }
+
+            body = request_data.get('body')
+            if isinstance(body, str):
+                body = substitute_variables(body, environment_vars or {})
+                try:
+                    body = json.loads(body)  # Parse JSON if it's a string
+                except:
+                    pass
+
+            start_time = datetime.now()
             
             # Make the request
             response = requests.request(
                 method=request_data['method'],
-                url=request_data['url'],
+                url=url,
                 headers=headers,
                 params=request_data.get('params', {}),
-                json=request_data.get('body'),
+                json=body if isinstance(body, (dict, list)) else None,
+                data=body if isinstance(body, str) else None,
                 timeout=10
             )
             
