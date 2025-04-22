@@ -86,3 +86,34 @@ def handle_environments():
         db.session.add(new_env)
         db.session.commit()
         return jsonify(new_env.to_dict()), 201
+
+# Execution Endpoint
+@api_bp.route('/execute', methods=['POST'])
+def execute_request():
+    request_data = request.json
+    
+    # Execute the request
+    result = RequestExecutor.execute(request_data)
+    
+    if not result['success']:
+        return jsonify({'error': result['error']}), 500
+    
+    # Save to history
+    history = History(
+        request_data=request_data,
+        response_status=result['status'],
+        response_data=json.dumps(result['data']) if isinstance(result['data'], dict) else result['data'],
+        response_headers=result['headers'],
+        duration=result['duration']
+    )
+    db.session.add(history)
+    db.session.commit()
+    
+    return jsonify({
+        'status': result['status'],
+        'headers': result['headers'],
+        'data': result['data'],
+        'duration': result['duration'],
+        'history_id': history.id
+    })
+
