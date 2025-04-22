@@ -71,3 +71,18 @@ def handle_collections():
         db.session.commit()
         return jsonify(new_collection.to_dict()), 201
 
+# Environments Endpoints
+@api_bp.route('/environments', methods=['GET', 'POST'])
+def handle_environments():
+    if request.method == 'GET':
+        envs = Environment.query.order_by(Environment.created_at.desc()).all()
+        return jsonify([e.to_dict() for e in envs])
+    else:
+        data = request.json
+        new_env = Environment(
+            name=data['name'],
+            variables=data.get('variables', {})
+        )
+        db.session.add(new_env)
+        db.session.commit()
+        return jsonify(new_env.to_dict()), 201
