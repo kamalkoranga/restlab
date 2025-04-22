@@ -6,11 +6,13 @@ from json import dumps
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
+
 # Requests Endpoints
 @api_bp.route('/requests', methods=['GET'])
 def get_requests():
     requests = Request.query.order_by(Request.created_at.desc()).all()
     return jsonify([r.to_dict() for r in requests])
+
 
 @api_bp.route('/requests', methods=['POST'])
 def create_request():
@@ -30,6 +32,7 @@ def create_request():
     db.session.add(new_request)
     db.session.commit()
     return jsonify(new_request.to_dict()), 201
+
 
 @api_bp.route('/requests/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_request(id):
@@ -55,6 +58,7 @@ def handle_request(id):
         db.session.commit()
         return jsonify({'success': True})
 
+
 # Collections Endpoints (similar structure)
 @api_bp.route('/collections', methods=['GET', 'POST'])
 def handle_collections():
@@ -71,6 +75,7 @@ def handle_collections():
         db.session.commit()
         return jsonify(new_collection.to_dict()), 201
 
+
 # Environments Endpoints
 @api_bp.route('/environments', methods=['GET', 'POST'])
 def handle_environments():
@@ -86,6 +91,7 @@ def handle_environments():
         db.session.add(new_env)
         db.session.commit()
         return jsonify(new_env.to_dict()), 201
+
 
 # Execution Endpoint
 @api_bp.route('/execute', methods=['POST'])
@@ -118,11 +124,13 @@ def execute_request():
     
     return jsonify(result)
 
+
 # History Endpoints
 @api_bp.route('/history', methods=['GET'])
 def get_history():
     history = History.query.order_by(History.created_at.desc()).all()
     return jsonify([h.to_dict() for h in history])
+
 
 @api_bp.route('/history/<int:id>', methods=['GET', 'DELETE'])
 def handle_history_item(id):
