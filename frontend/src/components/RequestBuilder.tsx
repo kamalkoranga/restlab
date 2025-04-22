@@ -67,6 +67,59 @@ export const RequestBuilder: React.FC = () => {
     }));
   }, [bodyType, rawBody, formData]);
 
+  // Helper function to handle PUT requests
+  const handlePutRequest = async (req: ApiRequest) => {
+    // For PUT requests, we want to ensure there's a body
+    if ((req.method === 'PUT' || req.method === 'POST') && 
+        req.body.mode === 'none') {
+      // Automatically switch to raw JSON mode if no body is set
+      setBodyType('raw');
+      setActiveTab('body');
+      return {
+        success: false,
+        message: 'PUT requests typically require a body. Please add a request body.'
+      };
+    }
+    
+    return { success: true };
+  };
+
+  // Helper function to get sample body based on method
+  const getSampleBody = (method: HttpMethod) => {
+    switch(method) {
+      case 'PUT':
+        return '{\n  "id": 1,\n  "name": "Updated Item",\n  "description": "This is an updated item"\n}';
+      case 'POST':
+        return '{\n  "name": "New Item",\n  "description": "This is a new item"\n}';
+      default:
+        return '{\n  \n}';
+    }
+  };
+
+  // Helper function to add appropriate Content-Type header if missing
+  const addContentTypeHeader = () => {
+    if (bodyType === 'raw') {
+      const hasContentType = request.headers.some(
+        header => header.key.toLowerCase() === 'content-type'
+      );
+      
+      if (!hasContentType) {
+        const newHeaders = [
+          ...request.headers,
+          { key: 'Content-Type', value: 'application/json', enabled: true }
+        ];
+        handleHeadersChange(newHeaders);
+      }
+    }
+  };
+
+  // Add effect to auto-add Content-Type header when body type changes to raw
+  useEffect(() => {
+    if (bodyType === 'raw') {
+      addContentTypeHeader();
+    }
+  }, [bodyType]);
+
 
   const handleSendRequest = async () => {
     // Validate body if JSON is selected
@@ -76,6 +129,16 @@ export const RequestBuilder: React.FC = () => {
         setJsonFormatError('');
       } catch (e) {
         setJsonFormatError('Invalid JSON format');
+        return;
+      }
+    }
+    
+    // If this is a PUT request, perform additional validation
+    if (request.method === 'PUT') {
+      const putValidation = await handlePutRequest(request);
+      if (!putValidation.success) {
+        // Display a helpful message to the user
+        alert(putValidation.message);
         return;
       }
     }
@@ -127,6 +190,16 @@ export const RequestBuilder: React.FC = () => {
   
   const handleMethodChange = (method: HttpMethod) => {
     setRequest(prev => ({ ...prev, method }));
+    
+    // If switching to PUT or POST, make sure body tab is accessible
+    if (method === 'PUT' || method === 'POST') {
+      // If body is currently none, prompt user to add a body
+      if (bodyType === 'none') {
+        setBodyType('raw');
+        setRawBody('{\n  \n}');
+        setActiveTab('body');
+      }
+    }
   };
   
   const handleUrlChange = (url: string) => {
@@ -218,7 +291,7 @@ export const RequestBuilder: React.FC = () => {
       </div>
 
       {/* URL Bar */}
-      <div className="url-container glass-panel">
+      <div className="url-container glass-panel" style={{zIndex:200}}>
         {/* Replace the old method dropdown with the new MethodDropdown component */}
         <MethodDropdown 
           selectedMethod={request.method}
@@ -314,6 +387,8 @@ export const RequestBuilder: React.FC = () => {
               <button 
                 className={`body-type-button ${bodyType === 'none' ? 'active' : ''}`}
                 onClick={() => setBodyType('none')}
+                disabled={request.method === 'PUT' || request.method === 'POST'}
+                title={request.method === 'PUT' || request.method === 'POST' ? "Body required for this method" : ""}
               >
                 None
               </button>
@@ -335,19 +410,30 @@ export const RequestBuilder: React.FC = () => {
               <div className="raw-body-container-modern">
                 <div className="raw-body-header">
                   <div className="body-type-label">JSON</div>
-                  <button 
-                    onClick={formatRawBody}
-                    className="format-button-modern"
-                    title="Format JSON"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M21 10H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M11 14H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M7 18H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M7 6H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    Format
-                  </button>
+                  <div className="raw-body-actions">
+                    {request.method === 'PUT' && (
+                      <button 
+                        onClick={() => setRawBody(getSampleBody('PUT'))}
+                        className="sample-button-modern"
+                        title="Insert sample PUT body"
+                      >
+                        Sample PUT Body
+                      </button>
+                    )}
+                    <button 
+                      onClick={formatRawBody}
+                      className="format-button-modern"
+                      title="Format JSON"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 10H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M11 14H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M7 18H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M7 6H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Format
+                    </button>
+                  </div>
                 </div>
                 {jsonFormatError && (
                   <div className="json-error-modern">{jsonFormatError}</div>
@@ -355,7 +441,11 @@ export const RequestBuilder: React.FC = () => {
                 <textarea
                   value={rawBody}
                   onChange={(e) => setRawBody(e.target.value)}
-                  placeholder='Enter raw JSON body, e.g., {"key": "value"}'
+                  placeholder={
+                    request.method === 'PUT' 
+                      ? 'Enter PUT request body (required)' 
+                      : 'Enter raw JSON body, e.g., {"key": "value"}'
+                  }
                   className={`raw-body-input-modern ${jsonFormatError ? 'has-error' : ''}`}
                   rows={10}
                 />
