@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime
 from json import loads
+from werkzeug.security import check_password_hash
 
 
 class Request(db.Model):
@@ -79,3 +80,11 @@ class History(db.Model):
             'duration': self.duration,
             'created_at': self.created_at.isoformat()
         }
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
