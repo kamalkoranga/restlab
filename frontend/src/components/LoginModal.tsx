@@ -101,48 +101,90 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
   return (
     <div className="modal-overlay">
       <div className="modal-content login-modal">
-        <button className="modal-close" onClick={onClose}>×</button>
-        
+        <button className="modal-close" onClick={onClose}>
+          ×
+        </button>
+
         <div className="modal-header">
           <div className="modal-logo">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 9V3H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M3 15V21H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M21 3L14 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10 14L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 9V3H15"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M3 15V21H9"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M21 3L14 10"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M10 14L3 21"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
           <h2>Log in to RESTLab</h2>
           <p>Welcome back! Please enter your details.</p>
         </div>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" style={{ color: "white" }}>
+              Email
+            </label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={errors.email ? 'error' : ''}
+              className={errors.email ? "error" : ""}
               placeholder="Enter your email"
+              style={{ color: "white" }}
             />
-            {errors.email && <div className="error-message">{errors.email}</div>}
+            {errors.email && (
+              <div className="error-message">{errors.email}</div>
+            )}
           </div>
-          
+
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" style={{ color: "white" }}>
+              Password
+            </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={errors.password ? 'error' : ''}
+              className={errors.password ? "error" : ""}
               placeholder="Enter your password"
+              style={{ color: "white" }}
             />
-            {errors.password && <div className="error-message">{errors.password}</div>}
+            {errors.password && (
+              <div className="error-message">{errors.password}</div>
+            )}
           </div>
-          
+
           <div className="form-row">
             {/* <div className="checkbox-group">
               <input
@@ -153,12 +195,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
               />
               <label htmlFor="remember-me">Remember me</label>
             </div> */}
-            <a href="#" className="forgot-password">Forgot password?</a>
+            <a href="#" className="forgot-password">
+              Forgot password?
+            </a>
           </div>
-          
-          <button 
-            type="submit" 
-            className={`submit-button ${isLoading ? 'loading' : ''}`}
+
+          <button
+            type="submit"
+            className={`submit-button ${isLoading ? "loading" : ""}`}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -166,13 +210,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
                 <span className="loading-spinner"></span>
                 <span>Logging in...</span>
               </>
-            ) : 'Log in'}
+            ) : (
+              "Log in"
+            )}
           </button>
         </form>
-        
+
         <div className="modal-footer">
           <p>
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <button className="text-button" onClick={onSignup}>
               Sign up
             </button>

@@ -188,7 +188,7 @@
   
   /* Improved gradient text readability */
   .gradient-text {
-    background: var(--gradient-primary);
+    /* background: var(--gradient-primary); */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
