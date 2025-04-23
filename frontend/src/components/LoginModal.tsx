@@ -26,8 +26,10 @@ async function loginUser(email: string, password: string, rememberMe: boolean, s
       "user",
       JSON.stringify({ email, token: response.data.token })
     );
+    return true;
   } catch (error) {
     console.error("Login error:", error);
+    return false;
     // handle error (show message, etc.)
   }
 
@@ -68,20 +70,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
       setIsLoading(true);
       
       // Simulate API call
-      setTimeout(() => {
+      setTimeout(async () => {
         setIsLoading(false);
-
-        // console.log('Login submitted:', { email, password, rememberMe });
         
-        // // Call the success callback
+        const success = await loginUser(email, password, true, setIsLoading);
         
-        loginUser(email, password, true, setIsLoading);
-        
-        if (onLoginSuccess) {
-          onLoginSuccess();
+        if (success) {
+          if (onLoginSuccess) {
+            onLoginSuccess();
+          }
+          onClose();
+        }else {
+          setErrors({ email: 'Invalid email or password' });
         }
-        // Close modal after successful login
-        onClose();
       }, 1500);
     }
   };
