@@ -8,6 +8,11 @@ from json import dumps
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 
+@api_bp.route('/')
+def index():
+    return jsonify({'message': 'Welcome to the API!'})
+
+
 # Requests Endpoints
 @api_bp.route('/requests', methods=['GET'])
 def get_requests():
