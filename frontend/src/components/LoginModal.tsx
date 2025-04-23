@@ -36,7 +36,7 @@ async function loginUser(email: string, password: string, rememberMe: boolean, s
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,11 +71,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
       setTimeout(() => {
         setIsLoading(false);
 
-        console.log('Login submitted:', { email, password, rememberMe });
+        // console.log('Login submitted:', { email, password, rememberMe });
         
         // // Call the success callback
         
-        loginUser(email, password, rememberMe, setIsLoading);
+        loginUser(email, password, true, setIsLoading);
         
         if (onLoginSuccess) {
           onLoginSuccess();
@@ -143,7 +143,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
           </div>
           
           <div className="form-row">
-            <div className="checkbox-group">
+            {/* <div className="checkbox-group">
               <input
                 type="checkbox"
                 id="remember-me"
@@ -151,7 +151,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
                 onChange={(e) => setRememberMe(e.target.checked)}
               />
               <label htmlFor="remember-me">Remember me</label>
-            </div>
+            </div> */}
             <a href="#" className="forgot-password">Forgot password?</a>
           </div>
           
