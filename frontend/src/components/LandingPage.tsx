@@ -288,7 +288,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
                 <p>RESTLab has completely transformed how I test and document my APIs. The dark mode is gorgeous, and the interface is so intuitive that I've cut my testing time in half.</p>
                 <div className="testimonial-author">
                   <div className="author-avatar">
-                    <img src="/avatars/dev1.jpg" alt="Developer avatar" />
+                    <img src="/avatars/dev1.png" alt="Developer avatar" />
                   </div>
                   <div className="author-info">
                     <h4>Alex Johnson</h4>
@@ -307,7 +307,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
                 <p>The environment variables feature is a game-changer for my team. We can switch between dev, staging, and prod seamlessly. The dark theme is easy on the eyes during late-night debugging sessions.</p>
                 <div className="testimonial-author">
                   <div className="author-avatar">
-                    <img src="/avatars/dev2.jpg" alt="Developer avatar" />
+                    <img src="/avatars/dev1.png" alt="Developer avatar" />
                   </div>
                   <div className="author-info">
                     <h4>Samantha Chen</h4>
@@ -326,7 +326,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
                 <p>As a team lead, I appreciate how RESTLab helps onboard new developers quickly. The collections feature lets us share API endpoints effortlessly, and the dark UI is a hit with the whole team.</p>
                 <div className="testimonial-author">
                   <div className="author-avatar">
-                    <img src="/avatars/dev3.jpg" alt="Developer avatar" />
+                    <img src="/avatars/dev1.png" alt="Developer avatar" />
                   </div>
                   <div className="author-info">
                     <h4>Michael Rodriguez</h4>
@@ -363,10 +363,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
           </button>
           <div className="users-using">
             <div className="avatar-stack">
-              <div className="avatar-item"><img src="/avatars/user1.jpg" alt="User avatar" /></div>
-              <div className="avatar-item"><img src="/avatars/user2.jpg" alt="User avatar" /></div>
-              <div className="avatar-item"><img src="/avatars/user3.jpg" alt="User avatar" /></div>
-              <div className="avatar-item"><img src="/avatars/user4.jpg" alt="User avatar" /></div>
+              <div className="avatar-item"><img src="/avatars/dev1.png" alt="User avatar" /></div>
+              <div className="avatar-item"><img src="/avatars/dev1.png" alt="User avatar" /></div>
+              <div className="avatar-item"><img src="/avatars/dev1.png" alt="User avatar" /></div>
+              <div className="avatar-item"><img src="/avatars/dev1.png" alt="User avatar" /></div>
               <div className="avatar-item more">+2.5k</div>
             </div>
             <p>Over 2,500 developers joined last month</p>
