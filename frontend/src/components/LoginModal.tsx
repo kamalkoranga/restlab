@@ -1,9 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface LoginModalProps {
   onClose: () => void;
   onSignup: () => void;
   onLoginSuccess?: () => void;
+}
+
+async function loginUser(email: string, password: string, rememberMe: boolean, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>) {
+  try {
+    const response = await axios.post("http://localhost:5000/api/login", {
+      email,
+      password,
+    });
+
+    if (rememberMe) {
+      localStorage.setItem("user", JSON.stringify({ email }));
+    } else {
+      localStorage.removeItem("user");
+    }
+
+    // handle successful login (store token, redirect, etc.)
+    console.log("Login success:", response.data);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ email, token: response.data.token })
+    );
+  } catch (error) {
+    console.error("Login error:", error);
+    // handle error (show message, etc.)
+  }
+
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSuccess }) => {
@@ -43,19 +70,32 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSignup, onLoginSucce
       // Simulate API call
       setTimeout(() => {
         setIsLoading(false);
-        // In a real app, we would make an actual API call here
+
         console.log('Login submitted:', { email, password, rememberMe });
         
-        // Call the success callback
+        // // Call the success callback
+        
+        loginUser(email, password, rememberMe, setIsLoading);
+        
         if (onLoginSuccess) {
           onLoginSuccess();
         }
-        
         // Close modal after successful login
         onClose();
       }, 1500);
     }
   };
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem('user') || '{}');
+    if (savedUser?.token) {
+      setEmail(savedUser.email);
+      console.log("User is already logged in");
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
+    }
+  }, []);
 
   return (
     <div className="modal-overlay">
