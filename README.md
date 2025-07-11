@@ -12,7 +12,7 @@ RestLab is a simple, intuitive API testing tool built as a hackathon project, in
 - 📁 Import/export requests as JSON
 
 ## 📸 Demo
-> Live demo: [postman-clone-grj2.onrender.com](https://postman-clone-grj2.onrender.com)
+> Live demo: [restlab-grl6.onrender.com](https://restlab-grl6.onrender.com)
 
 ## 📦 Tech Stack
 - Frontend: React
